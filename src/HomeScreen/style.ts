@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {moderateScale} from '../utils';
 
 export const styles = StyleSheet.create({
   container: {
@@ -6,7 +7,8 @@ export const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   textHomeScreen: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
+    marginVertical: moderateScale(20),
     fontWeight: '400',
     textAlign: 'center',
     color: '#000000',
