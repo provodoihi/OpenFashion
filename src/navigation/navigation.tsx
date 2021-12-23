@@ -11,7 +11,11 @@ export const AppNavigation = () => {
   return (
     <AppStack.Navigator initialRouteName={'Home'}>
       <AppStack.Screen name={'Home'} component={HomeScreen} />
-      <AppStack.Screen name={'Detail'} component={DetailScreen} />
+      <AppStack.Screen
+        options={{headerShown: false}}
+        name={'Detail'}
+        component={DetailScreen}
+      />
     </AppStack.Navigator>
   );
 };
