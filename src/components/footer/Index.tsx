@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.iconSocial}>
-        <TouchableOpacity>
-          <Image source={require('../../../assets/icon/twitterSocial.png')} />
+        <TouchableOpacity style={styles.iconImage}>
+          <Image source={require('../../../assets/icon/twitterSocial.png')} style={styles.iconImage} />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Image source={require('../../../assets/icon/instagramSocial.png')} />
+        <TouchableOpacity style={styles.iconImage}>
+          <Image source={require('../../../assets/icon/instagramSocial.png')} style={styles.iconImage} />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Image source={require('../../../assets/icon/youtubeSocial.png')} />
+        <TouchableOpacity style={styles.iconImage}>
+          <Image source={require('../../../assets/icon/youtubeSocial.png')} style={styles.iconImage} />
         </TouchableOpacity>
       </View>
       <Image source={require('../../../assets/icon/8.png')} style={styles.footerBoder} />
