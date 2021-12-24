@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   Text,
@@ -15,10 +15,16 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ProductList} from './types';
 import {ListItem} from './ProductListItem';
 import {LogBox} from 'react-native';
+import axios from 'axios';
+import {API_ROUTE, API_ROOT} from '../constants';
 
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
 export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
+  const [selectedProduct, setSelectedProduct] = useState<Array<ProductList>>(
+    [],
+  );
+  const [moreProducts, setMoreProducts] = useState<Array<ProductList>>([]);
   const renderItem = ({item}: ListRenderItemInfo<ProductList>) => {
     return (
       <ListItem
@@ -30,40 +36,26 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
     );
   };
 
-  const data: Array<ProductList> = [
-    {
-      id: 2,
-      name: 'MOHAN',
-      attribute: 'angora cardigan',
-      price: '$ 120',
-      imgUrl:
-        'https://s3-alpha-sig.figma.com/img/6a2d/eb3f/5dc08c8f3f72604885ea722fb8d95299?Expires=1641168000&Signature=H59Ic~e~3jZ5MlgRbjW7FVqMnVACOUwuqLF9S7hz~Hr4EDNlI5peA5B10k2To0xOAldLUjddZ7Fhn8pPYFnd0VPZRWQgPpYciTCIz3UuecrdygjeUn-lHh-Hn75ESUEBOvJsJ9QH5EfzVlnKm4LOXXqTu0J6VVe7aoBJqpfgKoKkle5BPWMAj6~pbMBJNkAq2nJLIPQJ8ROiBs7~TZM2mpFcbvZL5Y46kjQvI7acWvW0XtdY5q7pAXO25qqWL2I7tY5jolGC~vnCUoXAa7p9JRGMWRtF~kP9ykHzAwebkXZR0P7A7mqd-OU-sDJKC49~Ev0hX7Th98eAesUxms74EQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
-    },
-    {
-      id: 3,
-      name: 'MOHAN',
-      attribute: 'angora cardigan',
-      price: '$ 120',
-      imgUrl:
-        'https://s3-alpha-sig.figma.com/img/6a2d/eb3f/5dc08c8f3f72604885ea722fb8d95299?Expires=1641168000&Signature=H59Ic~e~3jZ5MlgRbjW7FVqMnVACOUwuqLF9S7hz~Hr4EDNlI5peA5B10k2To0xOAldLUjddZ7Fhn8pPYFnd0VPZRWQgPpYciTCIz3UuecrdygjeUn-lHh-Hn75ESUEBOvJsJ9QH5EfzVlnKm4LOXXqTu0J6VVe7aoBJqpfgKoKkle5BPWMAj6~pbMBJNkAq2nJLIPQJ8ROiBs7~TZM2mpFcbvZL5Y46kjQvI7acWvW0XtdY5q7pAXO25qqWL2I7tY5jolGC~vnCUoXAa7p9JRGMWRtF~kP9ykHzAwebkXZR0P7A7mqd-OU-sDJKC49~Ev0hX7Th98eAesUxms74EQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
-    },
-    {
-      id: 4,
-      name: 'MOHAN',
-      attribute: 'angora cardigan',
-      price: '$ 120',
-      imgUrl:
-        'https://s3-alpha-sig.figma.com/img/6a2d/eb3f/5dc08c8f3f72604885ea722fb8d95299?Expires=1641168000&Signature=H59Ic~e~3jZ5MlgRbjW7FVqMnVACOUwuqLF9S7hz~Hr4EDNlI5peA5B10k2To0xOAldLUjddZ7Fhn8pPYFnd0VPZRWQgPpYciTCIz3UuecrdygjeUn-lHh-Hn75ESUEBOvJsJ9QH5EfzVlnKm4LOXXqTu0J6VVe7aoBJqpfgKoKkle5BPWMAj6~pbMBJNkAq2nJLIPQJ8ROiBs7~TZM2mpFcbvZL5Y46kjQvI7acWvW0XtdY5q7pAXO25qqWL2I7tY5jolGC~vnCUoXAa7p9JRGMWRtF~kP9ykHzAwebkXZR0P7A7mqd-OU-sDJKC49~Ev0hX7Th98eAesUxms74EQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
-    },
-    {
-      id: 5,
-      name: 'MOHAN',
-      attribute: 'angora cardigan',
-      price: '$ 120',
-      imgUrl:
-        'https://s3-alpha-sig.figma.com/img/6a2d/eb3f/5dc08c8f3f72604885ea722fb8d95299?Expires=1641168000&Signature=H59Ic~e~3jZ5MlgRbjW7FVqMnVACOUwuqLF9S7hz~Hr4EDNlI5peA5B10k2To0xOAldLUjddZ7Fhn8pPYFnd0VPZRWQgPpYciTCIz3UuecrdygjeUn-lHh-Hn75ESUEBOvJsJ9QH5EfzVlnKm4LOXXqTu0J6VVe7aoBJqpfgKoKkle5BPWMAj6~pbMBJNkAq2nJLIPQJ8ROiBs7~TZM2mpFcbvZL5Y46kjQvI7acWvW0XtdY5q7pAXO25qqWL2I7tY5jolGC~vnCUoXAa7p9JRGMWRtF~kP9ykHzAwebkXZR0P7A7mqd-OU-sDJKC49~Ev0hX7Th98eAesUxms74EQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
-    },
-  ];
+  const getSelectedProduct = async () => {
+    try {
+      let response = await axios.get(
+        API_ROOT + API_ROUTE.SELECTED_PRODUCT_DETAIL,
+      );
+      setSelectedProduct(response.data);
+    } catch (error) {}
+  };
+
+  const getMoreProducts = async () => {
+    try {
+      let response = await axios.get(API_ROOT + API_ROUTE.MORE_PRODUCTS);
+      setMoreProducts(response.data);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getSelectedProduct();
+    getMoreProducts();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -90,7 +82,7 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
           <View style={styles.avaContainer}>
             <Image
               style={styles.ava}
-              source={require('../../assets/image/Rose.jpeg')}
+              source={{uri: selectedProduct[0]?.imgUrl}}
             />
             <Image
               style={styles.resize}
@@ -99,7 +91,7 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
           </View>
           <View style={styles.variation}>
             <View style={styles.productName}>
-              <Text style={styles.textName}> {'MOHAN'} </Text>
+              <Text style={styles.textName}> {selectedProduct[0]?.name} </Text>
               <Image
                 style={styles.export}
                 source={require('../../assets/image/Export.png')}
@@ -107,11 +99,11 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
             </View>
             <View style={styles.descriptionContainer}>
               <Text style={styles.descriptionText}>
-                {'Recycle Boucle Knit Cardigan Pink'}
+                {selectedProduct[0]?.attribute}
               </Text>
             </View>
             <View style={styles.priceContainer}>
-              <Text style={styles.priceText}>{'$120'}</Text>
+              <Text style={styles.priceText}>{selectedProduct[0]?.price}</Text>
             </View>
             <View style={styles.colorSize}>
               <View style={styles.color}>
@@ -256,7 +248,7 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
             source={require('../../assets/image/Decorative-Underline.png')}
           />
           <FlatList
-            data={data}
+            data={moreProducts}
             horizontal={false}
             numColumns={2}
             initialNumToRender={4}

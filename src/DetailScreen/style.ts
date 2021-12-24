@@ -320,7 +320,7 @@ export const styles = StyleSheet.create({
     marginTop: moderateScale(7.32),
   },
   alsoLikeBox: {
-    marginTop: moderateScale(69),
+    marginTop: moderateScale(33),
     marginBottom: moderateScale(22),
     width: '100%',
     height: moderateScale(674),
