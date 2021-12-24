@@ -21,6 +21,45 @@ import {API_ROUTE, API_ROOT} from '../constants';
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
 export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
+  const [isSClicked, setisSClicked] = useState(false);
+  const [isMClicked, setisMClicked] = useState(false);
+  const [isLClicked, setisLClicked] = useState(false);
+
+  const handleSize = (type: string) => {
+    switch (type) {
+      case 'S':
+        setisSClicked(true);
+        setisMClicked(false);
+        setisLClicked(false);
+        break;
+      case 'M':
+        setisSClicked(false);
+        setisMClicked(true);
+        setisLClicked(false);
+        break;
+      case 'L':
+        setisSClicked(false);
+        setisMClicked(false);
+        setisLClicked(true);
+        break;
+      default:
+        break;
+    }
+    // if (type === 'S') {
+    //   setisSClicked(true);
+    //   setisMClicked(false);
+    //   setisSClicked(false);
+    //   console.log('Phuc', isSClicked);
+    // } else if (type === 'M') {
+    //   setisSClicked(false);
+    //   setisMClicked(true);
+    //   setisLClicked(false);
+    // } else if (type === 'L') {
+    //   setisSClicked(false);
+    //   setisMClicked(false);
+    //   setisLClicked(true);
+    // }
+  };
   const [selectedProduct, setSelectedProduct] = useState<Array<ProductList>>(
     [],
   );
@@ -108,20 +147,55 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
             <View style={styles.colorSize}>
               <View style={styles.color}>
                 <Text style={styles.colorText}> {'Color'} </Text>
-                <View style={styles.color1} />
+                <View style={styles.colorchosen}>
+                  <View style={styles.color1} />
+                </View>
                 <View style={styles.color2} />
                 <View style={styles.color3} />
               </View>
               <View style={styles.size}>
                 <Text style={styles.sizeText}> {'Size'} </Text>
-                <TouchableOpacity style={styles.size1}>
-                  <Text style={styles.sText}> {'S'} </Text>
+                <TouchableOpacity
+                  style={[
+                    styles.size1,
+                    {backgroundColor: isSClicked ? 'black' : 'white'},
+                  ]}
+                  onPress={() => handleSize('S')}>
+                  <Text
+                    style={[
+                      styles.sText,
+                      {color: isSClicked ? '#F9F9F9' : '#555'},
+                    ]}>
+                    {'S'}
+                  </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.size2}>
-                  <Text style={styles.sText2}> {'M'} </Text>
+                <TouchableOpacity
+                  style={[
+                    styles.size2,
+                    {backgroundColor: isMClicked ? 'black' : 'white'},
+                  ]}
+                  onPress={() => handleSize('M')}>
+                  <Text
+                    style={[
+                      styles.sText2,
+                      {color: isMClicked ? '#F9F9F9' : '#555'},
+                    ]}>
+                    {'M'}
+                  </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.size2}>
-                  <Text style={styles.sText2}> {'L'} </Text>
+                <TouchableOpacity
+                  style={[
+                    styles.size2,
+                    {backgroundColor: isLClicked ? 'black' : 'white'},
+                  ]}
+                  onPress={() => handleSize('L')}>
+                  <Text
+                    style={[
+                      styles.sText2,
+                      {color: isLClicked ? '#F9F9F9' : '#555'},
+                    ]}>
+                    {'L'}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
