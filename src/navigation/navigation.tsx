@@ -10,11 +10,15 @@ const AppStack = createNativeStackNavigator<AppRoutes>();
 export const AppNavigation = () => {
   return (
     <AppStack.Navigator initialRouteName={'Home'}>
-      <AppStack.Screen name={'Home'} component={HomeScreen} />
       <AppStack.Screen
+        name={'Home'}
+        component={HomeScreen}
         options={{headerShown: false}}
+      />
+      <AppStack.Screen
         name={'Detail'}
         component={DetailScreen}
+        options={{headerShown: false}}
       />
     </AppStack.Navigator>
   );
