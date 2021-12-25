@@ -1,12 +1,11 @@
 import React from 'react'
 import { View, Text, SafeAreaView, Image, FlatList, TouchableOpacity } from 'react-native';
-import Swiper from 'react-native-swiper';
 import data from '../../../assets/dataImage/Product';
 import styles from './Style';
 
 const Product = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.containerProduct}>
       <View style={styles.title}>
         <Text style={styles.titleText}>JUST FOR YOU</Text>
       </View>
@@ -32,7 +31,7 @@ const Product = () => {
         }}
         keyExtractor={item => item.id?.toString()}
       />
-    </SafeAreaView >
+    </View >
   )
 }
 

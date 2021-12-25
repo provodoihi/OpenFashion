@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { moderateScale } from '../../utils';
 const styles = StyleSheet.create({
-  container: {
+  containerProduct: {
     height: moderateScale(480),
     marginBottom:moderateScale(38),
     alignItems: 'center',

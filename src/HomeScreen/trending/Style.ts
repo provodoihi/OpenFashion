@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     height: moderateScale(140),
     marginBottom:moderateScale(22.44),
     alignItems: 'center',
+    backgroundColor:'white',
   },
   trending:{
     marginTop: moderateScale(6),
