@@ -129,7 +129,9 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
             <View testID="Hello" style={[styles.slide]}>
               <Image
                 style={styles.imgbanner}
-                source={require('../../assets/image/Banner.png')}
+                source={{
+                  uri: 'https://img01.ztat.net/article/spp-media-p1/68f6bc7dd3ab466387793333bd2b2450/7b9deb288288486895e370c741e92ba6.jpg?imwidth=300',
+                }}
               />
             </View>
             <View testID="Beautiful" style={[styles.slide]}>

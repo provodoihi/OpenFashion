@@ -12,8 +12,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    alignSelf: 'center',
-    // backgroundColor: '#E7EAEF',
+    paddingHorizontal: moderateScale(16),
+    // alignSelf: 'center',
+    backgroundColor: '#E7EAEF',
   },
   menu: {
     width: scale(24),
@@ -24,14 +25,14 @@ export const styles = StyleSheet.create({
     height: verticalScale(24),
   },
   logo: {
-    height: 35,
-    width: 78,
-    marginLeft: 110,
-    marginRight: 70,
+    height: moderateScale(35),
+    width: moderateScale(78),
+    marginLeft: moderateScale(110),
+    marginRight: moderateScale(70),
   },
   imglogo: {
-    height: 32,
-    width: 78,
+    height: moderateScale(32),
+    width: moderateScale(78),
   },
   option: {
     flexDirection: 'row',
@@ -40,7 +41,7 @@ export const styles = StyleSheet.create({
   iconsearch: {
     width: scale(24),
     height: verticalScale(24),
-    marginRight: 18,
+    marginRight: moderateScale(18),
   },
   iconshoppingcart: {
     width: scale(24),
@@ -53,30 +54,30 @@ export const styles = StyleSheet.create({
   },
   imgbanner: {
     width: '100%',
-    height: 630,
+    height: moderateScale(630),
   },
   slide: {
     width: '100%',
-    height: 50,
+    height: moderateScale(50),
   },
   wrap: {
-    height: 630,
+    height: moderateScale(630),
   },
   dot: {
-    width: 6,
-    height: 6,
-    marginLeft: 5,
-    marginRight: 5,
+    width: moderateScale(6),
+    height: moderateScale(6),
+    marginLeft: moderateScale(5),
+    marginRight: moderateScale(5),
     transform: [{rotate: '45deg'}],
     borderColor: '#FCFCFC',
     borderWidth: 1,
   },
   activedot: {
     backgroundColor: '#FCFCFC',
-    width: 6,
-    height: 6,
-    marginLeft: 5,
-    marginRight: 5,
+    width: moderateScale(6),
+    height: moderateScale(6),
+    marginLeft: moderateScale(5),
+    marginRight: moderateScale(5),
     transform: [{rotate: '45deg'}],
   },
   luxury: {
@@ -108,7 +109,7 @@ export const styles = StyleSheet.create({
     letterSpacing: 1.2,
     color: '#333333',
     opacity: 0.7,
-    lineHeight: 47,
+    lineHeight: moderateScale(47),
   },
   and: {
     width: scale(25.81),
