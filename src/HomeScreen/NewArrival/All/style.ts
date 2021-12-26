@@ -26,13 +26,13 @@ export const styles = StyleSheet.create({
   },
   txtNameProduct: {
     fontSize: moderateScale(12),
-    lineHeight: 16,
+    lineHeight: moderateScale(16),
     fontFamily: 'TenorSans-Regular',
     textAlign: 'center',
     color: '#333333',
   },
   txtPrice: {
-    lineHeight: 24,
+    lineHeight: moderateScale(24),
     fontSize: moderateScale(15),
     color: '#DD8560',
   },

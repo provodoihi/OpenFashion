@@ -11,38 +11,39 @@ import {ProductList} from './type';
 import {LogBox} from 'react-native';
 import {styles} from './style';
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-const data: Array<ProductList> = [
-  {
-    id: 1,
-    name: '21WN reversible angora cardigan',
-    price: '$120',
-    imgUrl: require('./../../../../assets/image/Product1.png'),
-  },
-  {
-    id: 2,
-    name: '21WN reversible angora cardigan',
-    price: '$120',
-    imgUrl: require('../../../../assets/image/Product2.png'),
-  },
-  {
-    id: 3,
-    name: '21WN reversible angora cardigan',
-    price: '$120',
-    imgUrl: require('../../../../assets/image/Product3.png'),
-  },
-  {
-    id: 4,
-    name: 'Oblong bag',
-    price: '$120',
-    imgUrl: require('../../../../assets/image/Product4.png'),
-  },
-];
+// const data: Array<ProductList> = [
+//   {
+//     id: 1,
+//     name: '21WN reversible angora cardigan',
+//     price: '$120',
+//     imgUrl: require('./../../../../assets/image/Product1.png'),
+//   },
+//   {
+//     id: 2,
+//     name: '21WN reversible angora cardigan',
+//     price: '$120',
+//     imgUrl: require('../../../../assets/image/Product2.png'),
+//   },
+//   {
+//     id: 3,
+//     name: '21WN reversible angora cardigan',
+//     price: '$120',
+//     imgUrl: require('../../../../assets/image/Product3.png'),
+//   },
+//   {
+//     id: 4,
+//     name: 'Oblong bag',
+//     price: '$120',
+//     imgUrl: require('../../../../assets/image/Product4.png'),
+//   },
+// ];
 
-interface NavigationType {
+interface AllSectionType {
   navigation?: () => void;
+  data?: Array<ProductList>;
 }
 
-export default function All({navigation}: NavigationType) {
+export default function All({navigation, data}: AllSectionType) {
   const renderItem = ({item}: ListRenderItemInfo<ProductList>) => {
     return (
       <View style={styles.list}>
@@ -50,7 +51,10 @@ export default function All({navigation}: NavigationType) {
           <TouchableOpacity
             onPress={navigation}
             style={{width: 165, height: 200}}>
-            <Image source={item.imgUrl} style={{width: 165, height: 200}} />
+            <Image
+              source={{uri: item.imgUrl}}
+              style={{width: 165, height: 200}}
+            />
           </TouchableOpacity>
           <View style={[styles.infomation]}>
             <Text style={[styles.txtNameProduct]}>{item.name}</Text>

@@ -40,7 +40,12 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
   const ToggleScreen: any = () => {
     if (screen) {
       if (screen === 'All') {
-        return <All navigation={() => navigation.navigate('Detail')} />;
+        return (
+          <All
+            data={MoreProducts}
+            navigation={() => navigation.navigate('Detail')}
+          />
+        );
       }
       if (screen === 'Apparel') {
         return <Apparel />;
