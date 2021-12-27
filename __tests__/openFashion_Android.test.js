@@ -1,5 +1,5 @@
 import {remote} from 'webdriverio';
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 180000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 240000;
 const android = {
   path: '/wd/hub',
   port: 4723,
@@ -75,7 +75,31 @@ afterEach(async () => {
 //   expect(await element2.isDisplayed()).toBe(true);
 // });
 
-it('can it be clicked', async () => {
+// it('can it be clicked', async () => {
+//   await client.pause(2500);
+//   // scroll to element
+//   await client.execute('mobile: scroll', {
+//     strategy: 'accessibility id',
+//     selector: 'All',
+//   });
+//   await client.pause(1000);
+//   const element1 = await client.$('~Apparel');
+//   await element1.click();
+//   await client.pause(1000);
+//   const element2 = await client.$('~Dress');
+//   await element2.click();
+//   await client.pause(1000);
+//   const element3 = await client.$('~Tshirt');
+//   await element3.click();
+//   await client.pause(1000);
+//   const element4 = await client.$('~Bag');
+//   await element4.click();
+//   await client.pause(1000);
+//   const element5 = await client.$('~All');
+//   await element5.click();
+// });
+
+it('check item before filling data', async () => {
   await client.pause(2500);
   // scroll to element
   await client.execute('mobile: scroll', {
@@ -83,18 +107,24 @@ it('can it be clicked', async () => {
     selector: 'All',
   });
   await client.pause(1000);
-  const element1 = await client.$('~Apparel');
+  const element1 = await client.$('~MoreProducts2');
   await element1.click();
+  const element2 = await client.$('~ProductName');
+  expect(await element2.getText()).toMatch('');
+});
+
+it('check item after filling data', async () => {
+  await client.pause(2500);
+  // scroll to element
+  await client.execute('mobile: scroll', {
+    strategy: 'accessibility id',
+    selector: 'All',
+  });
   await client.pause(1000);
-  const element2 = await client.$('~Dress');
-  await element2.click();
-  await client.pause(1000);
-  const element3 = await client.$('~Tshirt');
-  await element3.click();
-  await client.pause(1000);
-  const element4 = await client.$('~Bag');
-  await element4.click();
-  await client.pause(1000);
-  const element5 = await client.$('~All');
-  await element5.click();
+  const element1 = await client.$('~MoreProducts2');
+  await element1.click();
+  await client.pause(500);
+  const element2 = await client.$('~ProductName');
+  await element2.waitForDisplayed({timeout: 22500});
+  expect(await element2.getText()).toMatch('MOHAN');
 });

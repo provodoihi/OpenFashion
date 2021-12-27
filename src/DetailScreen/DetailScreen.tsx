@@ -17,6 +17,7 @@ import {ListItem} from './ProductListItem';
 import {LogBox} from 'react-native';
 import axios from 'axios';
 import {API_ROUTE, API_ROOT} from '../constants';
+import {testID} from '../utils';
 
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
@@ -58,7 +59,9 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
       let response = await axios.get(
         API_ROOT + API_ROUTE.SELECTED_PRODUCT_DETAIL,
       );
-      setSelectedProduct(response.data);
+      setTimeout(() => {
+        setSelectedProduct(response.data);
+      }, 20000);
     } catch (error) {}
   };
 
@@ -108,7 +111,10 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
           </View>
           <View style={styles.variation}>
             <View style={styles.productName}>
-              <Text style={styles.textName}> {selectedProduct[0]?.name} </Text>
+              <Text style={styles.textName} {...testID('ProductName')}>
+                {' '}
+                {selectedProduct[0]?.name ? selectedProduct[0]?.name : ''}{' '}
+              </Text>
               <Image
                 style={styles.export}
                 source={require('../../assets/image/Export.png')}
