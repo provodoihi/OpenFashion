@@ -136,6 +136,7 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
             <View style={[styles.slide]}>
               <Image
                 style={styles.imgbanner}
+                {...testID('Slide2')}
                 source={{
                   uri: 'https://img01.ztat.net/article/spp-media-p1/68f6bc7dd3ab466387793333bd2b2450/7b9deb288288486895e370c741e92ba6.jpg?imwidth=300',
                 }}
@@ -166,7 +167,8 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
             <View style={[styles.maincategory]}>
               <TouchableOpacity
                 onPress={() => setScreen('All')}
-                style={[styles.btnAll]}>
+                style={[styles.btnAll]}
+                {...testID('All')}>
                 <Text
                   style={[
                     styles.scname,
@@ -174,8 +176,7 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
                       color: screen === 'All' ? '#2e3515' : '#9f9f9f',
                       fontWeight: screen === 'All' ? 'bold' : '500',
                     },
-                  ]}
-                  {...testID('All')}>
+                  ]}>
                   All
                 </Text>
                 <View
@@ -190,7 +191,8 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => setScreen('Apparel')}
-                style={[styles.btnApparel]}>
+                style={[styles.btnApparel]}
+                {...testID('Apparel')}>
                 <Text
                   style={[
                     styles.scname,
@@ -213,7 +215,8 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => setScreen('Dress')}
-                style={[styles.btnDress]}>
+                style={[styles.btnDress]}
+                {...testID('Dress')}>
                 <Text
                   style={[
                     styles.scname,
@@ -236,7 +239,8 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => setScreen('Tshirt')}
-                style={[styles.btnTshirt]}>
+                style={[styles.btnTshirt]}
+                {...testID('Tshirt')}>
                 <Text
                   style={[
                     styles.scname,
@@ -259,7 +263,8 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => setScreen('Bag')}
-                style={[styles.btnBag]}>
+                style={[styles.btnBag]}
+                {...testID('Bag')}>
                 <Text
                   style={[
                     styles.scname,
