@@ -21,44 +21,22 @@ import {API_ROUTE, API_ROOT} from '../constants';
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
 export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
-  const [isSClicked, setisSClicked] = useState(false);
-  const [isMClicked, setisMClicked] = useState(false);
-  const [isLClicked, setisLClicked] = useState(false);
+  const [size, setSize] = useState<string>('');
 
   const handleSize = (type: string) => {
     switch (type) {
       case 'S':
-        setisSClicked(true);
-        setisMClicked(false);
-        setisLClicked(false);
+        setSize('S');
         break;
       case 'M':
-        setisSClicked(false);
-        setisMClicked(true);
-        setisLClicked(false);
+        setSize('M');
         break;
       case 'L':
-        setisSClicked(false);
-        setisMClicked(false);
-        setisLClicked(true);
+        setSize('L');
         break;
       default:
         break;
     }
-    // if (type === 'S') {
-    //   setisSClicked(true);
-    //   setisMClicked(false);
-    //   setisSClicked(false);
-    //   console.log('Phuc', isSClicked);
-    // } else if (type === 'M') {
-    //   setisSClicked(false);
-    //   setisMClicked(true);
-    //   setisLClicked(false);
-    // } else if (type === 'L') {
-    //   setisSClicked(false);
-    //   setisMClicked(false);
-    //   setisLClicked(true);
-    // }
   };
   const [selectedProduct, setSelectedProduct] = useState<Array<ProductList>>(
     [],
@@ -158,13 +136,13 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
                 <TouchableOpacity
                   style={[
                     styles.size1,
-                    {backgroundColor: isSClicked ? 'black' : 'white'},
+                    {backgroundColor: size === 'S' ? 'black' : 'white'},
                   ]}
                   onPress={() => handleSize('S')}>
                   <Text
                     style={[
                       styles.sText,
-                      {color: isSClicked ? '#F9F9F9' : '#555'},
+                      {color: size === 'S' ? '#F9F9F9' : '#555'},
                     ]}>
                     {'S'}
                   </Text>
@@ -172,13 +150,13 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
                 <TouchableOpacity
                   style={[
                     styles.size2,
-                    {backgroundColor: isMClicked ? 'black' : 'white'},
+                    {backgroundColor: size === 'M' ? 'black' : 'white'},
                   ]}
                   onPress={() => handleSize('M')}>
                   <Text
                     style={[
                       styles.sText2,
-                      {color: isMClicked ? '#F9F9F9' : '#555'},
+                      {color: size === 'M' ? '#F9F9F9' : '#555'},
                     ]}>
                     {'M'}
                   </Text>
@@ -186,13 +164,13 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
                 <TouchableOpacity
                   style={[
                     styles.size2,
-                    {backgroundColor: isLClicked ? 'black' : 'white'},
+                    {backgroundColor: size === 'L' ? 'black' : 'white'},
                   ]}
                   onPress={() => handleSize('L')}>
                   <Text
                     style={[
                       styles.sText2,
-                      {color: isLClicked ? '#F9F9F9' : '#555'},
+                      {color: size === 'L' ? '#F9F9F9' : '#555'},
                     ]}>
                     {'L'}
                   </Text>

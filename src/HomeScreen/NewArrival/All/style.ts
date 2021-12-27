@@ -54,4 +54,12 @@ export const styles = StyleSheet.create({
     height: verticalScale(18),
     marginLeft: scale(8),
   },
+  imageContainer: {
+    width: moderateScale(165),
+    height: moderateScale(220),
+  },
+  imageProduct: {
+    width: '100%',
+    height: '100%',
+  },
 });

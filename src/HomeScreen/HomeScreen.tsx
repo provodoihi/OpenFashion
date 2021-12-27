@@ -25,6 +25,7 @@ import Openfashion from './openFashionContent/Index';
 import FollowUs from './followUs/Index';
 import Footer from '../components/footer/Index';
 import {getMoreProducts} from '../service/api';
+import {testID} from '../utils';
 export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
   const [screen, setScreen] = useState('All');
   const [MoreProducts, setMoreProducts] = useState<Array<ProductList>>([]);
@@ -74,6 +75,7 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
           <Image
             style={[styles.imglogo]}
             source={require('../../assets/image/Logo.png')}
+            {...testID('Logo')}
           />
         </View>
         <View style={[styles.option]}>
@@ -102,7 +104,7 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
             paginationStyle={{
               bottom: verticalScale(20),
             }}>
-            <View testID="Hello" style={[styles.slide]}>
+            <View style={[styles.slide]}>
               <ImageBackground
                 style={[styles.imgbanner]}
                 source={{
@@ -131,7 +133,7 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
                 </View>
               </ImageBackground>
             </View>
-            <View testID="Hello" style={[styles.slide]}>
+            <View style={[styles.slide]}>
               <Image
                 style={styles.imgbanner}
                 source={{
@@ -139,7 +141,7 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
                 }}
               />
             </View>
-            <View testID="Beautiful" style={[styles.slide]}>
+            <View style={[styles.slide]}>
               <Image
                 style={styles.imgbanner}
                 source={{
@@ -171,7 +173,8 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
                       color: screen === 'All' ? '#2e3515' : '#9f9f9f',
                       fontWeight: screen === 'All' ? 'bold' : '500',
                     },
-                  ]}>
+                  ]}
+                  {...testID('All')}>
                   All
                 </Text>
                 <View
@@ -376,7 +379,8 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
                 <View style={styles.groupProduct}>
                   <TouchableOpacity
                     style={styles.product}
-                    onPress={() => navigation.navigate('Detail')}>
+                    onPress={() => navigation.navigate('Detail')}
+                    {...testID(`Products${item.id}`)}>
                     <Image
                       source={{uri: item?.imgUrl}}
                       style={styles.productImage}
