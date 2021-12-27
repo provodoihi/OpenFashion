@@ -144,6 +144,7 @@ export const HomeScreen = ({navigation}: AppNavigationProps<'Home'>) => {
             <View style={[styles.slide]}>
               <Image
                 style={styles.imgbanner}
+                {...testID('Slide3')}
                 source={{
                   uri: 'https://images.theurge.com/farfetch/QPc8EsejwGpiqNgZjWG-4ydXORI=/main/3x/776-1035/neutrals-little-liffner-tulip-medium-asymmetric-tote-bag-2.jpg',
                 }}
