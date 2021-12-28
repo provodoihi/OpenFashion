@@ -18,6 +18,7 @@ let client;
 beforeEach(async () => {
   try {
     client = await remote(android);
+    client.updateSettings({waitForIdleTimeout: 1000});
   } catch (error) {
     console.log(error);
   }
@@ -32,7 +33,9 @@ afterEach(async () => {
 });
 
 // it('is logo existed', async () => {
+//   await client.pause(2000);
 //   const element = await client.$('~Logo');
+//   await client.pause(2000);
 //   expect(await element.isDisplayed()).toBe(true);
 // });
 
@@ -48,7 +51,7 @@ afterEach(async () => {
 // });
 
 // it('can it be swiped', async () => {
-//   await client.pause(2500);
+//   await client.pause(2000);
 //   // swipe right to left 2 times
 //   for (let i = 1; i <= 2; i++) {
 //     await client.touchAction([
@@ -57,12 +60,12 @@ afterEach(async () => {
 //       {action: 'moveTo', x: 250, y: 350},
 //       'release',
 //     ]);
-//     await client.pause(500);
+//     await client.pause(800);
 //   }
 //   const element = await client.$('~Slide3');
 //   await element.waitForDisplayed({timeout: 2500});
 //   expect(await element.isDisplayed()).toBe(true);
-//   await client.pause(500);
+//   await client.pause(800);
 //   // swipe left to right
 //   await client.touchAction([
 //     {action: 'press', x: 250, y: 350},
@@ -76,7 +79,7 @@ afterEach(async () => {
 // });
 
 // it('can it be clicked', async () => {
-//   await client.pause(2500);
+//   await client.pause(2000);
 //   // scroll to element
 //   await client.execute('mobile: scroll', {
 //     strategy: 'accessibility id',
@@ -99,22 +102,38 @@ afterEach(async () => {
 //   await element5.click();
 // });
 
-it('check item before filling data', async () => {
-  await client.pause(2500);
-  // scroll to element
-  await client.execute('mobile: scroll', {
-    strategy: 'accessibility id',
-    selector: 'All',
-  });
-  await client.pause(1000);
-  const element1 = await client.$('~MoreProducts2');
-  await element1.click();
-  const element2 = await client.$('~ProductName');
-  expect(await element2.getText()).toMatch('');
-});
+// it('check item before filling data', async () => {
+//   await client.pause(2500);
+//   // scroll to element
+//   await client.execute('mobile: scroll', {
+//     strategy: 'accessibility id',
+//     selector: 'All',
+//   });
+//   await client.pause(1000);
+//   const element1 = await client.$('~MoreProducts2');
+//   await element1.click();
+//   const element2 = await client.$('~ProductName');
+//   expect(await element2.getText()).toMatch('');
+// });
 
-it('check item after filling data', async () => {
-  await client.pause(2500);
+// it('check item after filling data', async () => {
+//   await client.pause(2500);
+//   // scroll to element
+//   await client.execute('mobile: scroll', {
+//     strategy: 'accessibility id',
+//     selector: 'All',
+//   });
+//   await client.pause(1000);
+//   const element1 = await client.$('~MoreProducts2');
+//   await element1.click();
+//   await client.pause(500);
+//   const element2 = await client.$('~ProductName');
+//   await element2.waitForDisplayed({timeout: 22500});
+//   expect(await element2.getText()).toMatch('MOHAN');
+// });
+
+it('check init and loading state', async () => {
+  await client.pause(2000);
   // scroll to element
   await client.execute('mobile: scroll', {
     strategy: 'accessibility id',
@@ -123,8 +142,11 @@ it('check item after filling data', async () => {
   await client.pause(1000);
   const element1 = await client.$('~MoreProducts2');
   await element1.click();
-  await client.pause(500);
+  await client.pause(2000);
   const element2 = await client.$('~ProductName');
-  await element2.waitForDisplayed({timeout: 22500});
-  expect(await element2.getText()).toMatch('MOHAN');
+  await client.pause(2000);
+  // init: check if element is existed
+  expect(await element2.isExisting()).toBe(true);
+  // loading: check if element is displayed
+  expect(await element2.getText()).toMatch('');
 });
