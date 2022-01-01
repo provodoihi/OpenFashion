@@ -61,7 +61,7 @@ export const DetailScreen = ({navigation}: AppNavigationProps<'Detail'>) => {
       );
       setTimeout(() => {
         setSelectedProduct(response.data);
-      }, 20000);
+      }, 6000);
     } catch (error) {}
   };
 

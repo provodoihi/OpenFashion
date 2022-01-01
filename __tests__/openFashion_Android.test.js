@@ -142,9 +142,9 @@ it('check init and loading state', async () => {
   await client.pause(1000);
   const element1 = await client.$('~MoreProducts2');
   await element1.click();
-  await client.pause(2000);
+  await client.pause(1000);
   const element2 = await client.$('~ProductName');
-  await client.pause(2000);
+  await client.pause(1000);
   // init: check if element is existed
   expect(await element2.isExisting()).toBe(true);
   // loading: check if element is displayed
